@@ -7,6 +7,12 @@ import '@/global.css';
 
 import { Platform } from 'react-native';
 
+// export const COLORS = {
+//   primary: '#0A2E6E',
+//   secondary: '#1E88E5',
+//   background: '#F8FAFC',
+// };
+
 export const Colors = {
   light: {
     text: '#000000',
