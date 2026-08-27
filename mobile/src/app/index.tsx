@@ -1,98 +1,159 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+  StyleSheet,
+} from 'react-native';
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Text style={styles.title}>
+          PLUMBING Store by AY Square
+        </Text>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+        <TextInput
+          placeholder="Search taps, faucets, pipes..."
+          style={styles.search}
+        />
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+        <View style={styles.banner}>
+          <Text style={styles.bannerTitle}>
+            Premium Plumbing Solutions
+          </Text>
+          <Text style={styles.bannerSubtitle}>
+            Up to 30% Off
+          </Text>
+        </View>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+        <Text style={styles.sectionTitle}>
+          Categories
+        </Text>
+
+        <View style={styles.grid}>
+          <View style={styles.categoryCard}>
+            <Text>🚰 Faucets</Text>
+          </View>
+
+          <View style={styles.categoryCard}>
+            <Text>🔧 Taps</Text>
+          </View>
+
+          <View style={styles.categoryCard}>
+            <Text>🚿 Showers</Text>
+          </View>
+
+          <View style={styles.categoryCard}>
+            <Text>🛠 Pipes</Text>
+          </View>
+
+          <View style={styles.categoryCard}>
+            <Text>⚙️ Valves</Text>
+          </View>
+
+          <View style={styles.categoryCard}>
+            <Text>🧰 Accessories</Text>
+          </View>
+        </View>
+
+        <Text style={styles.sectionTitle}>
+          Featured Products
+        </Text>
+
+        <View style={styles.productCard}>
+          <Text style={styles.productName}>Premium Basin Tap</Text>
+          <Text style={styles.price}>₹1,499</Text>
+        </View>
+
+        <View style={styles.productCard}>
+          <Text style={styles.productName}>Kitchen Mixer Tap</Text>
+          <Text style={styles.price}>₹2,999</Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#F8FAFC',
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
+
   title: {
-    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: '700',
+    margin: 20,
+    color: '#0A2E6E',
   },
-  code: {
-    textTransform: 'uppercase',
+
+  search: {
+    backgroundColor: '#fff',
+    marginHorizontal: 20,
+    padding: 14,
+    borderRadius: 12,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+
+  banner: {
+    margin: 20,
+    backgroundColor: '#0A2E6E',
+    padding: 20,
+    borderRadius: 16,
+  },
+
+  bannerTitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '700',
+  },
+
+  bannerSubtitle: {
+    color: '#fff',
+    marginTop: 8,
+  },
+
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginHorizontal: 20,
+    marginBottom: 12,
+  },
+
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginHorizontal: 20,
+  },
+
+  categoryCard: {
+    width: '48%',
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+
+  productCard: {
+    backgroundColor: '#fff',
+    marginHorizontal: 20,
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+  },
+
+  productName: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+
+  price: {
+    color: '#1E88E5',
+    fontWeight: '700',
+    marginTop: 8,
   },
 });
