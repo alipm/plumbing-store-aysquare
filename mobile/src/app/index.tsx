@@ -10,7 +10,7 @@ import {
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>
           PLUMBING Store by AY Square
         </Text>
@@ -24,56 +24,66 @@ export default function HomeScreen() {
           <Text style={styles.bannerTitle}>
             Premium Plumbing Solutions
           </Text>
+
           <Text style={styles.bannerSubtitle}>
             Up to 30% Off
           </Text>
         </View>
 
-        <Text style={styles.sectionTitle}>
-          Categories
-        </Text>
+        <Text style={styles.sectionTitle}>Categories</Text>
 
         <View style={styles.grid}>
-          <View style={styles.categoryCard}>
-            <Text>🚰 Faucets</Text>
-          </View>
-
-          <View style={styles.categoryCard}>
-            <Text>🔧 Taps</Text>
-          </View>
-
-          <View style={styles.categoryCard}>
-            <Text>🚿 Showers</Text>
-          </View>
-
-          <View style={styles.categoryCard}>
-            <Text>🛠 Pipes</Text>
-          </View>
-
-          <View style={styles.categoryCard}>
-            <Text>⚙️ Valves</Text>
-          </View>
-
-          <View style={styles.categoryCard}>
-            <Text>🧰 Accessories</Text>
-          </View>
+          <CategoryCard title="🚰 Faucets" />
+          <CategoryCard title="🔧 Taps" />
+          <CategoryCard title="🚿 Showers" />
+          <CategoryCard title="🛠 Pipes" />
+          <CategoryCard title="⚙️ Valves" />
+          <CategoryCard title="🧰 Accessories" />
         </View>
 
         <Text style={styles.sectionTitle}>
           Featured Products
         </Text>
 
-        <View style={styles.productCard}>
-          <Text style={styles.productName}>Premium Basin Tap</Text>
-          <Text style={styles.price}>₹1,499</Text>
-        </View>
+        <ProductCard
+          name="Premium Basin Tap"
+          price="₹1,499"
+        />
 
-        <View style={styles.productCard}>
-          <Text style={styles.productName}>Kitchen Mixer Tap</Text>
-          <Text style={styles.price}>₹2,999</Text>
-        </View>
+        <ProductCard
+          name="Kitchen Mixer Tap"
+          price="₹2,999"
+        />
+
+        <ProductCard
+          name="Luxury Faucet"
+          price="₹3,499"
+        />
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+function CategoryCard({ title }: { title: string }) {
+  return (
+    <View style={styles.categoryCard}>
+      <Text>{title}</Text>
+    </View>
+  );
+}
+
+function ProductCard({
+  name,
+  price,
+}: {
+  name: string;
+  price: string;
+}) {
+  return (
+    <View style={styles.productCard}>
+      <Text style={styles.productName}>{name}</Text>
+      <Text style={styles.price}>{price}</Text>
+    </View>
   );
 }
 
@@ -91,35 +101,35 @@ const styles = StyleSheet.create({
   },
 
   search: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     marginHorizontal: 20,
     padding: 14,
     borderRadius: 12,
   },
 
   banner: {
-    margin: 20,
     backgroundColor: '#0A2E6E',
-    padding: 20,
+    margin: 20,
     borderRadius: 16,
+    padding: 20,
   },
 
   bannerTitle: {
-    color: '#fff',
+    color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '700',
   },
 
   bannerSubtitle: {
-    color: '#fff',
+    color: '#FFFFFF',
     marginTop: 8,
   },
 
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
     marginHorizontal: 20,
     marginBottom: 12,
+    fontSize: 18,
+    fontWeight: '600',
   },
 
   grid: {
@@ -131,19 +141,19 @@ const styles = StyleSheet.create({
 
   categoryCard: {
     width: '48%',
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     padding: 20,
     borderRadius: 12,
-    alignItems: 'center',
     marginBottom: 12,
+    alignItems: 'center',
   },
 
   productCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     marginHorizontal: 20,
-    padding: 16,
-    borderRadius: 12,
     marginBottom: 12,
+    borderRadius: 12,
+    padding: 16,
   },
 
   productName: {
@@ -152,8 +162,8 @@ const styles = StyleSheet.create({
   },
 
   price: {
+    marginTop: 8,
     color: '#1E88E5',
     fontWeight: '700',
-    marginTop: 8,
   },
 });
