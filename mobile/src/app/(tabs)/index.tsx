@@ -18,6 +18,7 @@ export default function HomeScreen() {
         <TextInput
           placeholder="Search taps, faucets, pipes..."
           style={styles.search}
+          onFocus={() => router.push('/search')}
         />
 
         <View style={styles.banner}>
