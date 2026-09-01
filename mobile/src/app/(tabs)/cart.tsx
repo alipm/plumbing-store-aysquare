@@ -1,31 +1,24 @@
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import { View, Text, Pressable, StyleSheet, ScrollView } from "react-native";
 
-import { useCartStore } from '@/store/cartStore';
+import { useCartStore } from "@/store/cartStore";
 
 export default function CartScreen() {
-  const {
-    items,
-    increaseQuantity,
-    decreaseQuantity,
-    removeItem,
-  } = useCartStore();
+  const { items, increaseQuantity, decreaseQuantity, removeItem } =
+    useCartStore();
 
   const total = items.reduce(
-    (sum, item) =>
-      sum + item.price * item.quantity,
-    0
+    (sum, item) => sum + item.price * item.quantity,
+    0,
   );
 
   if (items.length === 0) {
     return (
       <View style={styles.center}>
-        <Text>Cart is empty</Text>
+        <Text style={styles.emptyTitle}>Your Cart Is Empty</Text>
+
+        <Text style={styles.emptySubtitle}>
+          Browse products and add items to your cart.
+        </Text>
       </View>
     );
   }
@@ -33,53 +26,36 @@ export default function CartScreen() {
   return (
     <ScrollView style={styles.container}>
       {items.map((item) => (
-        <View
-          key={item.id}
-          style={styles.card}
-        >
-          <Text style={styles.name}>
-            {item.name}
-          </Text>
+        <View key={item.id} style={styles.card}>
+          <Text style={styles.name}>{item.name}</Text>
 
-          <Text>
-            ₹{item.price}
-          </Text>
+          <Text>₹{item.price}</Text>
 
-          <Text>
-            Quantity: {item.quantity}
-          </Text>
+          <Text>Quantity: {item.quantity}</Text>
 
           <View style={styles.actions}>
-            <Pressable
-              onPress={() =>
-                increaseQuantity(item.id)
-              }
-            >
+            <Pressable onPress={() => increaseQuantity(item.id)}>
               <Text>➕</Text>
             </Pressable>
 
-            <Pressable
-              onPress={() =>
-                decreaseQuantity(item.id)
-              }
-            >
+            <Pressable onPress={() => decreaseQuantity(item.id)}>
               <Text>➖</Text>
             </Pressable>
 
-            <Pressable
-              onPress={() =>
-                removeItem(item.id)
-              }
-            >
+            <Pressable onPress={() => removeItem(item.id)}>
               <Text>🗑️</Text>
             </Pressable>
           </View>
         </View>
       ))}
 
-      <Text style={styles.total}>
-        Total: ₹{total}
-      </Text>
+      <View style={styles.summaryCard}>
+        <Text>Total: ₹{total}</Text>
+      </View>
+
+      <Pressable style={styles.checkoutButton}>
+        <Text style={styles.checkoutText}>Proceed To Checkout</Text>
+      </Pressable>
     </ScrollView>
   );
 }
@@ -90,32 +66,62 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 
+  summaryCard: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 20,
+  },
+
+  checkoutButton: {
+    backgroundColor: "#0A2E6E",
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 12,
+  },
+
+  checkoutText: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "700",
+  },
+
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
   },
 
   name: {
-    fontWeight: '700',
+    fontWeight: "700",
   },
 
   actions: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 20,
     marginTop: 10,
   },
 
   total: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     marginTop: 20,
   },
 
   center: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  emptyTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+  },
+
+  emptySubtitle: {
+    marginTop: 8,
+    color: "#666",
   },
 });

@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { router } from "expo-router";
+import { useCartStore } from "@/store/cartStore";
 
 type Props = {
   id: string;
@@ -9,10 +10,15 @@ type Props = {
 };
 
 export default function ProductCard({ id, name, price, description }: Props) {
+  const addItem = useCartStore((state) => state.addItem);
+
   return (
     <Pressable
       style={styles.card}
-      onPress={() => {console.log('PRODUCT CLICKED', id); router.push(`/product/${id}`)}}
+      onPress={() => {
+        console.log("PRODUCT CLICKED", id);
+        router.push(`/product/${id}`);
+      }}
     >
       <Text style={styles.name}>{name}</Text>
 
@@ -22,7 +28,15 @@ export default function ProductCard({ id, name, price, description }: Props) {
 
       <Pressable
         style={styles.button}
-        onPress={() => router.push(`/product/${id}`)}
+        onPress={(e) => {
+          e.stopPropagation();
+
+          addItem({
+            id,
+            name,
+            price,
+          });
+        }}
       >
         <Text style={styles.buttonText}>Add To Cart</Text>
       </Pressable>
