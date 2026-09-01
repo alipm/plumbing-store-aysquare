@@ -2,6 +2,7 @@ import { useLocalSearchParams } from "expo-router";
 import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
 import { useCartStore } from "@/store/cartStore";
 import { products } from "@/data/products";
+import { Image } from "react-native";
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams();
@@ -21,7 +22,7 @@ export default function ProductDetailsScreen() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imagePlaceholder}>
-        <Text>Product Image</Text>
+        <Image source={product.image} style={styles.productImage} />
       </View>
 
       <Text style={styles.title}>{product.name}</Text>
@@ -57,6 +58,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F8FAFC",
     padding: 20,
+  },
+
+  productImage: {
+    width: "100%",
+    height: 180,
+    borderRadius: 12,
+    marginBottom: 12,
   },
 
   imagePlaceholder: {
