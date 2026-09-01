@@ -1,15 +1,17 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { router } from "expo-router";
 import { useCartStore } from "@/store/cartStore";
+import { Image } from "react-native";
 
 type Props = {
   id: string;
   name: string;
   price: number;
   description: string;
+  image: any;
 };
 
-export default function ProductCard({ id, name, price, description }: Props) {
+export default function ProductCard({ id, name, price, description, image }: Props) {
   const addItem = useCartStore((state) => state.addItem);
 
   return (
@@ -20,6 +22,7 @@ export default function ProductCard({ id, name, price, description }: Props) {
         router.push(`/product/${id}`);
       }}
     >
+      <Image source={image} style={styles.image} />
       <Text style={styles.name}>{name}</Text>
 
       <Text style={styles.description}>{description}</Text>
@@ -49,6 +52,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 12,
     padding: 16,
+    marginBottom: 12,
+  },
+
+  image: {
+    width: "100%",
+    height: 180,
+    borderRadius: 12,
     marginBottom: 12,
   },
 
