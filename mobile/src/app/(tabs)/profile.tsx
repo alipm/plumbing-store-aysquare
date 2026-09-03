@@ -18,9 +18,9 @@ export default function ProfileScreen() {
         <Text>My Orders</Text>
       </Pressable>
 
-      <View style={styles.card}>
+      <Pressable style={styles.card} onPress={() => router.push("/addresses")}>
         <Text>Manage Addresses</Text>
-      </View>
+      </Pressable>
 
       <View style={styles.card}>
         <Text>Settings</Text>
