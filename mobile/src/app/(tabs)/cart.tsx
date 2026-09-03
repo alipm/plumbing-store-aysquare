@@ -2,7 +2,6 @@ import { View, Text, Pressable, StyleSheet, ScrollView } from "react-native";
 
 import { useCartStore } from "@/store/cartStore";
 import { router } from 'expo-router';
-import { COLORS } from "@/constants/colors";
 
 export default function CartScreen() {
   const { items, increaseQuantity, decreaseQuantity, removeItem } =
@@ -70,14 +69,14 @@ const styles = StyleSheet.create({
   },
 
   summaryCard: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: "#fff",
     padding: 16,
     borderRadius: 12,
     marginTop: 20,
   },
 
   checkoutButton: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: "#0A2E6E",
     padding: 16,
     borderRadius: 12,
     marginTop: 12,
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: "#fff",
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
