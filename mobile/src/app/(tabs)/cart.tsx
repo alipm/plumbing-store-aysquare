@@ -1,6 +1,7 @@
 import { View, Text, Pressable, StyleSheet, ScrollView } from "react-native";
 
 import { useCartStore } from "@/store/cartStore";
+import { router } from 'expo-router';
 
 export default function CartScreen() {
   const { items, increaseQuantity, decreaseQuantity, removeItem } =
@@ -53,7 +54,8 @@ export default function CartScreen() {
         <Text>Total: ₹{total}</Text>
       </View>
 
-      <Pressable style={styles.checkoutButton}>
+      <Pressable style={styles.checkoutButton}
+        onPress={() => router.push('/checkout')} >
         <Text style={styles.checkoutText}>Proceed To Checkout</Text>
       </Pressable>
     </ScrollView>
