@@ -1,5 +1,7 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { user } from '@/data/user';
+import { View, Text, StyleSheet } from "react-native";
+import { user } from "@/data/user";
+import { router } from "expo-router";
+import { Pressable } from "react-native";
 
 export default function ProfileScreen() {
   return (
@@ -12,9 +14,9 @@ export default function ProfileScreen() {
         <Text>Phone: {user.phone}</Text>
       </View>
 
-      <View style={styles.card}>
+      <Pressable style={styles.card} onPress={() => router.push("/orders")}>
         <Text>My Orders</Text>
-      </View>
+      </Pressable>
 
       <View style={styles.card}>
         <Text>Manage Addresses</Text>
@@ -31,20 +33,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: "#F8FAFC",
   },
 
   heading: {
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 20,
   },
 
   card: {
-    backgroundColor: '#FFF',
+    backgroundColor: "#FFF",
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
   },
 });
-``
+``;
