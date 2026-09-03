@@ -18,7 +18,6 @@ export default function ProductCard({ id, name, price, description, image }: Pro
     <Pressable
       style={styles.card}
       onPress={() => {
-        console.log("PRODUCT CLICKED", id);
         router.push(`/product/${id}`);
       }}
     >
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 180,
-    borderRadius: 12,
+    borderRadius: 16,
     marginBottom: 12,
   },
 
